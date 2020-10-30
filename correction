@@ -1,0 +1,74 @@
+#Exercice 1
+
+def produit(liste):
+    """
+    renvoie les produits des éléments de liste 
+    liste est de type list
+    le résultat renvoyé est de type int ou float
+    renvoie None si la liste est vide
+    """
+    if len(liste) == 0 :
+        return None 
+    elif len(liste) == 1 :
+        return liste[0]
+    else : 
+        return liste[0]*produit(liste[1:]) # ou liste[-1]*produit(liste[0:-1])
+            
+t = [2,4,5,7]
+print(produit(t))
+
+
+
+#Exercice 2
+
+def mystere(a):
+    # a est une chaine de caracteres
+    if len(a) <= 1 :
+        return a 
+    else: 
+        return a[0] + mystere(a[2:])     #ou
+        #return mystere(a[1:]) + a[0]
+        
+test = "Salut"
+print(mystere(test))
+
+
+#Exercice 3
+
+class Rectangle:
+    def __init__(self, x, y, longueur, hauteur):
+        self.x = x
+        self.y = y
+        self.longueur = longueur
+        self.hauteur = hauteur
+   
+    def perimetre(self):
+        return 2*self.longueur + 2*self.hauteur
+
+    def aire(self):
+        return self.longueur*self.hauteur
+        
+    def grossir(self, delta):
+        self.longueur = self.longueur + delta
+        self.hauteur = self.hauteur + delta
+        
+    def collision(self, autre):
+        if autre.x <= self.x <= autre.x + autre.longueur and autre.y <= self.y <= autre.y + autre.hauteur :
+        
+            return True
+        return False
+       
+rect1 = Rectangle(100,50,70,30)
+rect2 = Rectangle(50,25,30,60)
+p1 = rect1.perimetre()
+a1 = rect1.aire()
+p2 = rect2.perimetre()
+a2 = rect2.aire()
+print("Le rectangle 1 a pour perimetre",p1,"et a pour aire",a1)
+print("Le rectangle 2 a pour perimetre",p2,"et a pour aire",a2)
+
+rect1.grossir(50)
+print(rect1.collision(rect2))
+
+rect2.grossir(50)
+print(rect1.collision(rect2))
